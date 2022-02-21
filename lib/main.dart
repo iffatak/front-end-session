@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:test_app/helpers/imageHelpers.dart';
+import 'package:test_app/theme/themeHelpers.dart';
 
 void main() {
   runApp(const MyApp());
@@ -32,11 +34,44 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text(widget.title),
-      ),
-      body:
-          Center(), // This trailing comma makes auto-formatting nicer for build methods.
+        backgroundColor: const Color(0xFF1B2237),
+        body: Centser(),
+        bottomNavigationBar: ClipRRect(
+          borderRadius: BorderRadius.circular(20),
+          child: Container(
+            height: 80,
+            decoration: backgroundGradient,
+            child: BottomNavigationBar(
+              backgroundColor: Colors.transparent,
+              elevation: 10,
+              type: BottomNavigationBarType.fixed,
+              showSelectedLabels: false,
+              showUnselectedLabels: false,
+              selectedIconTheme: IconThemeData(),
+              items: <BottomNavigationBarItem>[
+                BottomNavigationBarItem(icon: icon('home'), label: 'Home'),
+                BottomNavigationBarItem(
+                    icon: icon('combine'), label: 'Combine'),
+                BottomNavigationBarItem(icon: icon('wallet'), label: 'Wallet'),
+                BottomNavigationBarItem(icon: icon('chart'), label: 'Combine'),
+                const BottomNavigationBarItem(
+                    icon: Icon(
+                      Icons.more_horiz,
+                      color: Color(0xFF4A5268),
+                    ),
+                    label: 'Combine'),
+              ],
+            ),
+          ),
+        ));
+  }
+
+  icon(String name) {
+    return Image.asset(
+      getIconImage(name),
+      height: 24,
+      width: 24,
+      color: const Color(0xFF4A5268),
     );
   }
 }
