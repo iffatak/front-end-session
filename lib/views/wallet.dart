@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:test_app/common/optionChip.dart';
+import 'package:test_app/components/IconCard.dart';
+import 'package:test_app/helpers/imageHelpers.dart';
 
 class Wallet extends StatelessWidget {
   const Wallet({Key? key}) : super(key: key);
@@ -16,11 +18,33 @@ class Wallet extends StatelessWidget {
             children: [
               const OptionChips(),
               Title(title: 'Bitcoin'),
-              Row(
-                children: [
-                  //Icon,
-                  Text('Select Icon'),
-                ],
+              Padding(
+                padding: const EdgeInsets.symmetric(vertical: 8.0),
+                child: Row(
+                  children: [
+                    Row(children: [
+                      IconCard(icon: getIconImage('bitcoin')),
+                      SizedBox(width: 12),
+                      Text(
+                        'Select Coin',
+                        style: TextStyle(
+                            color: Colors.grey[600],
+                            fontSize: 16,
+                            letterSpacing: 1),
+                      ),
+                      SizedBox(width: 12),
+                      Icon(
+                        Icons.keyboard_arrow_down_rounded,
+                        color: Colors.grey[600],
+                      )
+                    ]),
+                    CircleAvatar(
+                      backgroundColor: Colors.transparent,
+                      backgroundImage: AssetImage(getIconImage('avatar')),
+                      radius: 20,
+                    )
+                  ],
+                ),
               )
             ],
           ),
