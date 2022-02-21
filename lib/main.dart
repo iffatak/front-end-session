@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:test_app/screens/HomeScreen.dart';
-import 'package:test_app/theme.dart';
 import 'package:test_app/helpers/imageHelpers.dart';
 import 'package:test_app/theme/themeHelpers.dart';
+import 'package:test_app/views/combine.dart';
+import 'package:test_app/views/wallet.dart';
 
 void main() {
   runApp(const MyApp());
@@ -10,17 +10,15 @@ void main() {
 
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
       theme: ThemeData(
-          primaryColor: Color(0xFF232D5C),
-          scaffoldBackgroundColor: Color(0xFF232D5C),
-          backgroundColor: Color(0xFF232D5C),
-          focusColor: Colors.white),
-      home: HomeScreen(),
+        primarySwatch: Colors.blue,
+      ),
+      home: const MyHomePage(title: 'Test App'),
     );
   }
 }
@@ -35,11 +33,29 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+  int currentIndex = 0;
+  List<Widget> children = [
+    // const Homepage(),
+    Combine(),
+    Container(),
+    Wallet(),
+    Combine(),
+    Wallet(),
+  ];
+
+  void onTabTapped(int index, {context}) {
+    setState(() {
+      currentIndex = index;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         backgroundColor: const Color(0xFF1B2237),
-        body: Center(),
+        body: Center(
+          child: children.elementAt(currentIndex),
+        ),
         bottomNavigationBar: ClipRRect(
           borderRadius: BorderRadius.circular(20),
           child: Container(
@@ -51,7 +67,10 @@ class _MyHomePageState extends State<MyHomePage> {
               type: BottomNavigationBarType.fixed,
               showSelectedLabels: false,
               showUnselectedLabels: false,
-              selectedIconTheme: IconThemeData(),
+              currentIndex: currentIndex,
+              selectedItemColor: Colors.amber[800],
+              onTap: (index) => onTabTapped(index, context: context), // new
+
               items: <BottomNavigationBarItem>[
                 BottomNavigationBarItem(icon: icon('home'), label: 'Home'),
                 BottomNavigationBarItem(
