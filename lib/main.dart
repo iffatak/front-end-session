@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:test_app/helpers/imageHelpers.dart';
+import 'package:test_app/screens/HomeScreen.dart';
 import 'package:test_app/theme/themeHelpers.dart';
 import 'package:test_app/views/combine.dart';
 import 'package:test_app/views/wallet.dart';
@@ -35,7 +36,7 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   int currentIndex = 0;
   List<Widget> children = [
-    // const Homepage(),
+    HomeScreen(),
     Combine(),
     Container(),
     Wallet(),
